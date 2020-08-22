@@ -1,0 +1,31 @@
+Gamify Specifications
+
+Gamify is a Video Games Store that models a store that is responsible for creating games and 
+assigning them to categories. Also, it can assign developers to those games.
+
+You are an Executive Producer within the company and are creating a system to simplify 
+and streamline your process.
+
+Models:
+    - Games with attributes name, age_rating and release date
+    - Categories with attributes name and description
+    - Developers with attributes name and website
+
+Endpoints:
+    - GET /games , /categories and /developers
+    - DELETE /games/ , /categories/ and /developers/
+    - POST /games , /categories and /developers
+    - PATCH /games/ , /categories/ and /developers/
+
+Roles:
+    - Clerk
+        - Can view games, categories and developers
+    - Owner
+        - All permissions a clerk has and…
+        - Add or delete a game, category or developer from the database
+        - Modify games, categories or developers
+
+Tests:
+    - One test for success behavior of each endpoint
+    - One test for error behavior of each endpoint
+    - At least two tests of RBAC for each role
