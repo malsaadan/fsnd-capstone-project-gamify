@@ -1,0 +1,18 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Edit Category{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form class="form" method="post" action="/categories/{{category.id}}/edit">
+      <h3 class="form-heading">Edit Category <em>{{ category.name.capitalize() }}</em></h3>
+      <div class="form-group">
+        <label for="name">Name</label>
+        {{ form.name(class_ = 'form-control', value = category.name, autofocus = true) }}
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+            {{ form.description(class_ = 'form-control', value=category.description, autofocus = true) }}
+    </div>
+      <input type="submit" value="Edit Category" class="btn btn-primary btn-lg btn-block">
+    </form>
+  </div>
+{% endblock %}

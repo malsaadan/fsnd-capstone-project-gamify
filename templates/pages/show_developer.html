@@ -1,0 +1,57 @@
+{% extends 'layouts/main.html' %}
+{% block title %}{{ developer.name.capitalize() }} | Developer{% endblock %}
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ developer.name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ developer.id }}
+		</p>
+		<p>
+			<i class="fa fa-link fa-fw" aria-hidden="true"></i>&nbsp; {{ developer.website.capitalize() }}
+		</p>
+		<hr>
+		<p style="margin-top: 3%;">		
+			<button class="btn btn-primary" id="edit-btn" data-id="{{ developer.id }}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;Edit</button>
+			<button class="btn btn-danger" id="delete-btn" data-id="{{ developer.id }}"><i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>&nbsp;Delete</button>
+		</p>
+	</div>
+</div>
+<hr>
+<section>
+    <h2 class="monospace">{{ games_count }} {% if games_count == 1 %}Game{% else %}Games{% endif %}</h2>
+    <div class="row">
+        {%for game in games %}
+        <div class="col-sm-4">
+            <div class="tile tile-show">
+                <img src="{{ game.image_link }}" alt="Game Image" style="width: 250px; height: 350px;"/>
+                <h5 style="width: 250px; text-align:center;"><a href="/games/{{ game.id }}">{{ game.name }}</a></h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+	document.querySelector('#edit-btn').onclick = function(e){
+		const developerId = e.target.dataset['id']
+		window.location = "/developers/"+developerId+"/edit";
+		}
+
+	document.querySelector('#delete-btn').onclick = function(e){
+		const developerId = e.target.dataset['id']
+		fetch('/developers/'+developerId, {
+			method: 'DELETE'
+		}).then(()=> {
+			console.log(`Developer with ID ${developerId} has been deleted successfully.`);
+			window.location='/'
+		}).catch( error => {
+			console.log(error);
+		})
+	}
+</script>
+
+{% endblock %}

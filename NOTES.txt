@@ -7,18 +7,27 @@ You are an Executive Producer within the company and are creating a system to si
 and streamline your process.
 
 Models:
-    - Games with attributes name, age_rating and release date
-    - Categories with attributes name and description
-    - Developers with attributes name and website
+    - Games with attributes id, name, age_rating, image, category_id, and developer_id
+    - Categories with attributes id, name, description, and games
+    - Developers with attributes id, name, website and games
 
 Endpoints:
-    - GET /games , /categories and /developers
-    - DELETE /games/ , /categories/ and /developers/
-    - POST /games , /categories and /developers
+    - GET:
+        - /games (Get all games)
+        - /games/<game_id> (Show a specific game)
+        - /categories (Get all categories)
+        - /categories/<category_id> (Show a specific category)
+        - /developers/<developer_id> (Show a specific developer)
+    - DELETE 
+        - /games/<game_id> (Delete a game)
+        - /categories/<category_id> (Delete a category)
+        - /developers/<developer_id> (Delete a developer)
+    - POST 
+        - /games , /categories and /developers
     - PATCH /games/ , /categories/ and /developers/
 
 Roles:
-    - Clerk
+    - Employee
         - Can view games, categories and developers
     - Owner
         - All permissions a clerk has and…

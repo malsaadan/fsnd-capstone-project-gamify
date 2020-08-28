@@ -1,0 +1,513 @@
+{
+	"id": "455702d2-fa06-4576-93a5-9c5003651a7e",
+	"name": "udacity-fsnd-capstone",
+	"timestamp": "2020-08-28T23:38:39.188Z",
+	"collection_id": "c6321cb5-a75f-43de-a55a-13a0d986b189",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 20,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "901fe7d5-656f-44f7-af53-cb1cd6b87538",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 156,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains games array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains games array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				156
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains games array": true
+				}
+			]
+		},
+		{
+			"id": "99eb696b-1ce7-44e7-86c6-8b7082ef16f1",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 13,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "df41da97-7298-4f22-9641-4b586d637bc7",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 11,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "3d170119-93cf-4ff0-867e-a434e633d1a8",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 10,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "c7d730f8-19fa-4d32-922b-b1715ebf0d21",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 10,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "b1fcbd4a-7c0b-4b44-a5ff-228035fcee7b",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 307,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains games array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains games array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				307
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains games array": true
+				}
+			]
+		},
+		{
+			"id": "99cc6977-9de8-4530-a8be-bc011281494c",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 1347,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1347
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "d5a80f72-86a6-4b7f-baec-8362e0bf904b",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 759,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				759
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "e38dcf04-47f4-4d3e-95ad-6f9d49aeb1b5",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 799,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				799
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "4fd60fbb-57dd-4be9-a8f4-38dcea582d32",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 903,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				903
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "5db79d1c-5155-4968-aeb7-7833804d1178",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains games array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains games array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains games array": true
+				}
+			]
+		},
+		{
+			"id": "7968a1eb-9fe5-40df-8036-707169089620",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 1023,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains game object": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains game object": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1023
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains game object": true
+				}
+			]
+		},
+		{
+			"id": "e8fa4668-8a80-4e12-829a-336a5a5ac762",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 849,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				849
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "cdb41fa9-3c75-4337-a451-9cb9e6c58bf5",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 794,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"value contains games array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"value contains games array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				794
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"value contains games array": true
+				}
+			]
+		},
+		{
+			"id": "b775b200-e246-411b-9c20-0fd46f9519c9",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 824,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				824
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 7827,
+	"collection": {
+		"requests": [
+			{
+				"id": "901fe7d5-656f-44f7-af53-cb1cd6b87538",
+				"method": "GET"
+			},
+			{
+				"id": "99eb696b-1ce7-44e7-86c6-8b7082ef16f1",
+				"method": "GET"
+			},
+			{
+				"id": "df41da97-7298-4f22-9641-4b586d637bc7",
+				"method": "POST"
+			},
+			{
+				"id": "3d170119-93cf-4ff0-867e-a434e633d1a8",
+				"method": "PATCH"
+			},
+			{
+				"id": "c7d730f8-19fa-4d32-922b-b1715ebf0d21",
+				"method": "DELETE"
+			},
+			{
+				"id": "b1fcbd4a-7c0b-4b44-a5ff-228035fcee7b",
+				"method": "GET"
+			},
+			{
+				"id": "99cc6977-9de8-4530-a8be-bc011281494c",
+				"method": "GET"
+			},
+			{
+				"id": "d5a80f72-86a6-4b7f-baec-8362e0bf904b",
+				"method": "POST"
+			},
+			{
+				"id": "e38dcf04-47f4-4d3e-95ad-6f9d49aeb1b5",
+				"method": "PATCH"
+			},
+			{
+				"id": "4fd60fbb-57dd-4be9-a8f4-38dcea582d32",
+				"method": "DELETE"
+			},
+			{
+				"id": "5db79d1c-5155-4968-aeb7-7833804d1178",
+				"method": "GET"
+			},
+			{
+				"id": "7968a1eb-9fe5-40df-8036-707169089620",
+				"method": "GET"
+			},
+			{
+				"id": "e8fa4668-8a80-4e12-829a-336a5a5ac762",
+				"method": "POST"
+			},
+			{
+				"id": "cdb41fa9-3c75-4337-a451-9cb9e6c58bf5",
+				"method": "PATCH"
+			},
+			{
+				"id": "b775b200-e246-411b-9c20-0fd46f9519c9",
+				"method": "DELETE"
+			}
+		]
+	}
+}

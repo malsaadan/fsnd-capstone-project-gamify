@@ -1,0 +1,54 @@
+{% extends 'layouts/main.html' %}
+{% block title %}{{ game.name.capitalize() }} | Game{% endblock %}
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ game.name.capitalize() }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ game.id }}
+		</p>
+		<p style="margin-top: 3%;">		
+			<button class="btn btn-primary" id="edit-btn" data-id="{{ game.id }}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;Edit</button>
+			<button class="btn btn-danger" id="delete-btn" data-id="{{ game.id }}"><i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>&nbsp;Delete</button>
+		</p>
+
+		<hr>
+		<p>
+			<i class="fa fa-flag fa-fw" aria-hidden="true"></i>&nbsp; {{ game.age_rating }}
+		</p>
+		<p>
+			<i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp; <a href="{{url_for('web_app.show_category', category_id=game.category_id)}}"> {{ category_name.capitalize() }} </a>
+		</p>
+		<p>
+			<i class="fa fa-desktop fa-fw" aria-hidden="true"></i>&nbsp; <a href="{{url_for('web_app.show_developer', developer_id=game.developer_id)}}"> {{ developer_name.capitalize() }}</a>
+		</p>
+		
+	<div class="col-sm-6">
+		<img src="{{ game.image_link }}" alt="Game Image" />
+	</div>
+	</div>
+</div>
+<hr>
+
+<script>
+	document.querySelector('#edit-btn').onclick = function(e){
+		const gameId = e.target.dataset['id']
+		window.location = "/games/"+gameId+"/edit";
+		}
+
+	document.querySelector('#delete-btn').onclick = function(e){
+		const gameId = e.target.dataset['id']
+		fetch('/games/'+gameId, {
+			method: 'DELETE'
+		}).then(()=> {
+			window.location='/'
+		}).catch( error => {
+			console.log(error);
+		})
+	}
+</script>
+
+{% endblock %}

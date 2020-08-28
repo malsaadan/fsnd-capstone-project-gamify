@@ -1,0 +1,30 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Edit Game{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form class="form" method="post" action="/games/{{game.id}}/edit">
+      <h3 class="form-heading">Edit game <em>{{ game.name.capitalize() }}</em></h3>
+      <div class="form-group">
+        <label for="name">Name</label>
+        {{ form.name(class_ = 'form-control', value = game.name, autofocus = true) }}
+      </div>
+      <div class="form-group">
+        <label for="age_rating">Age Rating</label>
+        {{ form.age_rating(class_ = 'form-control', value = game.age_rating, autofocus = true) }}
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+            {{ form.category(class_ = 'form-control', value=category_name, autofocus = true) }}
+    </div>
+    <div class="form-group">
+      <label for="developer">Developer</label>
+      {{ form.developer(class_ = 'form-control', value=developer_name, autofocus = true) }}
+    </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        {{ form.image_link(class_ = 'form-control', value = game.image_link, autofocus=true )}}
+      </div>
+      <input type="submit" value="Edit Game" class="btn btn-primary btn-lg btn-block">
+    </form>
+  </div>
+{% endblock %}

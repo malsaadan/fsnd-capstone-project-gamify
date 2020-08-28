@@ -1,6 +1,6 @@
 import os
 import pwd
-from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
+from sqlalchemy import Column, String, Integer, ForeignKey
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -18,11 +18,13 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    db.drop_all()
     db.create_all()
 
     # To setup the migration
     migrate = Migrate(app, db)
 
+    seed()
 
 #----------------------------------------------------------------------------#
 # Models
@@ -35,16 +37,16 @@ class Game(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     age_rating = Column(String)
-    release_date = Column(DateTime)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
     developer_id = Column(Integer, ForeignKey('developers.id'), nullable=False)
+    image_link = Column(String)
 
-    def __init__(self, name, age_rating, release_date, category_id, developer_id):
+    def __init__(self, name, age_rating, category_id, developer_id, image_link):
         self.name = name
         self.age_rating = age_rating
-        self.release_date = release_date
         self.category_id = category_id
         self.developer_id = developer_id
+        self.image_link = image_link
 
     # inserts a new model into a database
     def insert(self):
@@ -65,9 +67,9 @@ class Game(db.Model):
             'id': self.id,
             'name': self.name,
             'age_rating': self.age_rating,
-            'release_date': self.release_date, 
             'category_id': self.category_id,
-            'developer_id': self.developer_id
+            'developer_id': self.developer_id,
+            'image_link': self.image_link
         }
 
     def __repr__(self):
@@ -81,7 +83,7 @@ class Category(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
-    games = db.relationship('Game', backref='category', lazy='dynamic')
+    games = db.relationship('Game', cascade="all,delete", backref='category', lazy='dynamic')
 
     def __init__(self, name, description):
         self.name = name
@@ -104,7 +106,7 @@ class Category(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'name': self.description,
+            'name': self.name,
             'description': self.description
         }
 
@@ -117,9 +119,9 @@ class Developer(db.Model):
     __tablename__ = 'developers'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(120))
-    website = Column(String(120))
-    games = db.relationship('Game', backref='developer', lazy='dynamic')
+    name = Column(String)
+    website = Column(String)
+    games = db.relationship('Game', cascade="all,delete", backref='developer', lazy='dynamic')
 
     def __init__(self, name, website):
         self.name = name
@@ -148,3 +150,31 @@ class Developer(db.Model):
 
     def __repr__(self):
         return json.dumps(self.format())
+
+# Add seed data to the database
+def seed():
+    category1 = Category(
+        name='Role-playing',
+        description='The only other game genre based on the name of the game that inspired it, rogue was a 2d computer game and dungeon crawler from 1980. the game featured a text interface and random level generation. players overcame enemies and obstacles to increase their player stats.'
+    )
+    category2 = Category(
+        name='Fps',
+        description='First-person shooters (fps) are played from the main character’s viewpoint; call of duty, half-life, and halo are good examples.'
+    )
+    category1.insert()
+    category2.insert()
+
+    developer = Developer(
+        name='blizzard',
+        website='www.blizzard.com'
+    )
+    developer.insert()
+
+    game = Game(
+        name='league of legends',
+        age_rating='+18',
+        category_id=1,
+        developer_id=1,
+        image_link='https://sm.ign.com/t/ign_mear/screenshot/default/league-of-legends_6d7q.h960.jpg'
+    )
+    game.insert()

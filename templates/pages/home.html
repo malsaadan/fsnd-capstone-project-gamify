@@ -6,20 +6,20 @@
 		<h1>Gamify ✨</h1>
 		<p class="lead">Where gamers' dreams come true.</p>
 		<h3>
-			<form action="/games" method="GET"><button class="btn btn-primary btn-lg">Browse All Games</button></form>
-			<form action="/" method="GET"><button class="btn btn-default btn-lg">Post a game</button></form>
+			<form action="/games" method="GET"><button class="btn btn-primary btn-lg" style="width: 33%;">Browse All Games</button></form>
+			<form action="/games/create" method="GET"><button class="btn btn-default btn-lg" style="width: 33%;">Post a game</button></form>
 		</h3>
 		<h3>
-			<form action="/categories" method="GET"><button class="btn btn-primary btn-lg">Browse Categories</button></form>
-			<form action="/" method="GET"><button class="btn btn-default btn-lg">Post a Category</button></form>
+			<form action="/categories" method="GET"><button class="btn btn-primary btn-lg" style="width: 33%;">Browse Categories</button></form>
+			<form action="/categories/create" method="GET"><button class="btn btn-default btn-lg" style="width: 33%;">Post a Category</button></form>
 		</h3>
 		<h3>
-			<form action="/developers" method="GET"><button class="btn btn-primary btn-lg">Browse Developers</button></form>
-			<form action="/" method="GET"><button class="btn btn-default btn-lg">Post a Developer</button></form>
+			<form action="/developers" method="GET"><button class="btn btn-primary btn-lg" style="width: 33%;">Browse Developers</button></form>
+			<form action="/developers/create" method="GET"><button class="btn btn-default btn-lg" style="width: 33%;">Post a Developer</button></form>
 		</h3>
 	</div>
 	<div class="col-sm-6 hidden-sm hidden-xs">
-		<img id="front-splash" src="{{ url_for('static',filename='img/icon.png') }}" alt="Front Photo of Musical Band" />
+		<img id="front-image" src="{{ url_for('static',filename='img/controllers-image.png') }}" alt="Front Photo of Video Games Store" />
 	</div>
 </div>
 {% endblock %}

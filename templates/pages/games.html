@@ -1,0 +1,15 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Gamify | Games{% endblock %}
+{% block content %}
+<h3 style="display: inline-block;">All Games</h3>&nbsp;&nbsp;<h2 class="monospace" style="display: inline-block;">{{ games_count }}</h2>
+<div class="row shows">
+    {%for game in games %}
+    <div class="col-sm-4">
+        <div class="tile tile-show">
+            <a href="/games/{{ game.id }}"><img src="{{ game.image_link }}" alt="Game Image" style="width: 250px; height: 350px;"/></a>
+            <h4 style="width: 250px; text-align:center;"><a href="/games/{{ game.id }}">{{ game.name.capitalize() }}</a></h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
