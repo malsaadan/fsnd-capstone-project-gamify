@@ -1,6 +1,5 @@
 import os
 from sqlalchemy import Column, String, Integer, ForeignKey
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -21,9 +20,6 @@ def setup_db(app, database_path=database_path, database_name=database_name):
 
     # Seed the db with data (from a backup file)
     # os.system("psql -U mashaelmohammed  -d {0} -f  {1}".format(database_name, 'gamify.psql') )
-
-    # To setup the migration
-    migrate = Migrate(app, db)
 
 
 #----------------------------------------------------------------------------#

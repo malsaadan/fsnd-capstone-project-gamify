@@ -1,0 +1,4 @@
+AUTH0_CLIENT_ID=5xDwhLNUXk0SmdxZGSWcq81iVaANk3mn
+AUTH0_CALLBACK_URL=https://localhost:5000/callback
+AUTH0_DOMAIN=gamify-fsnd.us.auth0.com
+AUTH0_AUDIENCE=gamify
