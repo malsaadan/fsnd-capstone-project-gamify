@@ -2,11 +2,10 @@
 import os
 from flask import (
     Flask, 
-    request, 
+    request
 )
 from database.models import setup_db
 from flask_cors import CORS
-from logging import Formatter, FileHandler
 from routes.web import web_app
 from routes.api import api_app
 
@@ -15,7 +14,7 @@ def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object('config')
     setup_db(app)
-    
+
     # Set up Cors, allowing access for all origins (*)
     CORS(app)
 
@@ -29,16 +28,6 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
         return response
   
-    if not app.debug:
-        file_handler = FileHandler('error.log')
-        file_handler.setFormatter(
-            Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-        )
-        app.logger.setLevel(logging.INFO)
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
-        app.logger.info('errors')
-
     return app
 
 app = create_app()

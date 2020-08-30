@@ -1,30 +1,30 @@
 import os
-import pwd
 from sqlalchemy import Column, String, Integer, ForeignKey
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import json
 
 database_name = "gamify"
-username = pwd.getpwuid(os.getuid())[0]
 
-database_path = "postgres://{}@{}/{}".format(username, 'localhost:5432', database_name)
+database_path = "postgres://{}@{}/{}".format('mashaelmohammed', 'localhost:5432', database_name)
 
 db = SQLAlchemy()
 
 # binds a flask application and a SQLAlchemy service
-def setup_db(app, database_path=database_path):
+def setup_db(app, database_path=database_path, database_name=database_name):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.drop_all()
-    db.create_all()
+    # Drop all records
+    # db.drop_all()
+
+    # Seed the db with data (from a backup file)
+    # os.system("psql -U mashaelmohammed  -d {0} -f  {1}".format(database_name, 'gamify.psql') )
 
     # To setup the migration
     migrate = Migrate(app, db)
 
-    seed()
 
 #----------------------------------------------------------------------------#
 # Models
@@ -150,31 +150,3 @@ class Developer(db.Model):
 
     def __repr__(self):
         return json.dumps(self.format())
-
-# Add seed data to the database
-def seed():
-    category1 = Category(
-        name='Role-playing',
-        description='The only other game genre based on the name of the game that inspired it, rogue was a 2d computer game and dungeon crawler from 1980. the game featured a text interface and random level generation. players overcame enemies and obstacles to increase their player stats.'
-    )
-    category2 = Category(
-        name='Fps',
-        description='First-person shooters (fps) are played from the main character’s viewpoint; call of duty, half-life, and halo are good examples.'
-    )
-    category1.insert()
-    category2.insert()
-
-    developer = Developer(
-        name='blizzard',
-        website='www.blizzard.com'
-    )
-    developer.insert()
-
-    game = Game(
-        name='league of legends',
-        age_rating='+18',
-        category_id=1,
-        developer_id=1,
-        image_link='https://sm.ign.com/t/ign_mear/screenshot/default/league-of-legends_6d7q.h960.jpg'
-    )
-    game.insert()

@@ -6,7 +6,8 @@ from flask import (
     render_template,
     redirect,
     url_for,
-    flash
+    flash,
+    current_app
 )
 from database.models import Game, Category, Developer
 from auth.auth import AuthError, requires_auth

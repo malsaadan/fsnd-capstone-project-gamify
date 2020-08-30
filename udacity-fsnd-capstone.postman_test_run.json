@@ -1,18 +1,18 @@
 {
-	"id": "455702d2-fa06-4576-93a5-9c5003651a7e",
+	"id": "519ec5fb-6c54-42f1-b714-be885af59c99",
 	"name": "udacity-fsnd-capstone",
-	"timestamp": "2020-08-28T23:38:39.188Z",
-	"collection_id": "c6321cb5-a75f-43de-a55a-13a0d986b189",
+	"timestamp": "2020-08-30T00:58:31.404Z",
+	"collection_id": "542fccac-8214-4425-be0d-a18792ae01fd",
 	"folder_id": 0,
 	"environment_id": "0",
 	"totalPass": 20,
 	"totalFail": 0,
 	"results": [
 		{
-			"id": "901fe7d5-656f-44f7-af53-cb1cd6b87538",
+			"id": "562f4739-2818-4059-9267-3f58d44deea4",
 			"name": "/api/games",
 			"url": "http://localhost:5000/api/games",
-			"time": 156,
+			"time": 24,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -32,7 +32,7 @@
 				}
 			},
 			"times": [
-				156
+				24
 			],
 			"allTests": [
 				{
@@ -42,7 +42,88 @@
 			]
 		},
 		{
-			"id": "99eb696b-1ce7-44e7-86c6-8b7082ef16f1",
+			"id": "eb71d436-6852-4eb6-a1d5-0a248fe0a87a",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 17,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "80cfa264-7d23-47d6-b1cd-1e26a8222c51",
+			"name": "/api/games",
+			"url": "http://localhost:5000/api/games",
+			"time": 19,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "ad7a511a-46de-4dff-8d43-3ebbe3fa8256",
+			"name": "/api/games/1",
+			"url": "http://localhost:5000/api/games/1",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "0aaff327-aca0-44fd-9dd0-928db912f13a",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
 			"time": 13,
@@ -69,91 +150,10 @@
 			]
 		},
 		{
-			"id": "df41da97-7298-4f22-9641-4b586d637bc7",
+			"id": "6aff70ac-04fe-470f-84fc-68072689b4b5",
 			"name": "/api/games",
 			"url": "http://localhost:5000/api/games",
-			"time": 11,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status code is 401": true
-			},
-			"testPassFailCounts": {
-				"Status code is 401": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				11
-			],
-			"allTests": [
-				{
-					"Status code is 401": true
-				}
-			]
-		},
-		{
-			"id": "3d170119-93cf-4ff0-867e-a434e633d1a8",
-			"name": "/api/games/1",
-			"url": "http://localhost:5000/api/games/1",
-			"time": 10,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status code is 401": true
-			},
-			"testPassFailCounts": {
-				"Status code is 401": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				10
-			],
-			"allTests": [
-				{
-					"Status code is 401": true
-				}
-			]
-		},
-		{
-			"id": "c7d730f8-19fa-4d32-922b-b1715ebf0d21",
-			"name": "/api/games/1",
-			"url": "http://localhost:5000/api/games/1",
-			"time": 10,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status code is 401": true
-			},
-			"testPassFailCounts": {
-				"Status code is 401": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				10
-			],
-			"allTests": [
-				{
-					"Status code is 401": true
-				}
-			]
-		},
-		{
-			"id": "b1fcbd4a-7c0b-4b44-a5ff-228035fcee7b",
-			"name": "/api/games",
-			"url": "http://localhost:5000/api/games",
-			"time": 307,
+			"time": 19,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -173,7 +173,7 @@
 				}
 			},
 			"times": [
-				307
+				19
 			],
 			"allTests": [
 				{
@@ -183,10 +183,10 @@
 			]
 		},
 		{
-			"id": "99cc6977-9de8-4530-a8be-bc011281494c",
+			"id": "229d0964-f596-4883-9606-f66822585d22",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 1347,
+			"time": 853,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -201,7 +201,7 @@
 				}
 			},
 			"times": [
-				1347
+				853
 			],
 			"allTests": [
 				{
@@ -210,10 +210,10 @@
 			]
 		},
 		{
-			"id": "d5a80f72-86a6-4b7f-baec-8362e0bf904b",
+			"id": "05f41108-75b1-4b87-850a-bb347ecc188d",
 			"name": "/api/games",
 			"url": "http://localhost:5000/api/games",
-			"time": 759,
+			"time": 722,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -228,7 +228,7 @@
 				}
 			},
 			"times": [
-				759
+				722
 			],
 			"allTests": [
 				{
@@ -237,10 +237,10 @@
 			]
 		},
 		{
-			"id": "e38dcf04-47f4-4d3e-95ad-6f9d49aeb1b5",
+			"id": "40a91fc0-fd84-4ae3-97b4-39f813a36ff6",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 799,
+			"time": 743,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -255,7 +255,7 @@
 				}
 			},
 			"times": [
-				799
+				743
 			],
 			"allTests": [
 				{
@@ -264,10 +264,10 @@
 			]
 		},
 		{
-			"id": "4fd60fbb-57dd-4be9-a8f4-38dcea582d32",
+			"id": "6870d3d0-d7d1-44d7-9db0-9163804bba39",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 903,
+			"time": 737,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -282,7 +282,7 @@
 				}
 			},
 			"times": [
-				903
+				737
 			],
 			"allTests": [
 				{
@@ -291,10 +291,10 @@
 			]
 		},
 		{
-			"id": "5db79d1c-5155-4968-aeb7-7833804d1178",
+			"id": "9569dc75-3d82-4ce3-8d46-7c603c70f222",
 			"name": "/api/games",
 			"url": "http://localhost:5000/api/games",
-			"time": 22,
+			"time": 18,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -314,7 +314,7 @@
 				}
 			},
 			"times": [
-				22
+				18
 			],
 			"allTests": [
 				{
@@ -324,10 +324,10 @@
 			]
 		},
 		{
-			"id": "7968a1eb-9fe5-40df-8036-707169089620",
+			"id": "ffd97e44-eaf6-4687-8727-319802f3afff",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 1023,
+			"time": 760,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -347,7 +347,7 @@
 				}
 			},
 			"times": [
-				1023
+				760
 			],
 			"allTests": [
 				{
@@ -357,10 +357,10 @@
 			]
 		},
 		{
-			"id": "e8fa4668-8a80-4e12-829a-336a5a5ac762",
+			"id": "3676773f-611f-470c-993a-9dc6fc520d10",
 			"name": "/api/games",
 			"url": "http://localhost:5000/api/games",
-			"time": 849,
+			"time": 760,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -375,7 +375,7 @@
 				}
 			},
 			"times": [
-				849
+				760
 			],
 			"allTests": [
 				{
@@ -384,10 +384,10 @@
 			]
 		},
 		{
-			"id": "cdb41fa9-3c75-4337-a451-9cb9e6c58bf5",
+			"id": "2b51ec5a-0782-4d36-9e71-dae20a37669b",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 794,
+			"time": 716,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -407,7 +407,7 @@
 				}
 			},
 			"times": [
-				794
+				716
 			],
 			"allTests": [
 				{
@@ -417,10 +417,10 @@
 			]
 		},
 		{
-			"id": "b775b200-e246-411b-9c20-0fd46f9519c9",
+			"id": "fe30687b-c6e1-4ea0-af48-8ef7040b5284",
 			"name": "/api/games/1",
 			"url": "http://localhost:5000/api/games/1",
-			"time": 824,
+			"time": 705,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -435,7 +435,7 @@
 				}
 			},
 			"times": [
-				824
+				705
 			],
 			"allTests": [
 				{
@@ -445,67 +445,67 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 7827,
+	"totalTime": 6111,
 	"collection": {
 		"requests": [
 			{
-				"id": "901fe7d5-656f-44f7-af53-cb1cd6b87538",
+				"id": "562f4739-2818-4059-9267-3f58d44deea4",
 				"method": "GET"
 			},
 			{
-				"id": "99eb696b-1ce7-44e7-86c6-8b7082ef16f1",
+				"id": "eb71d436-6852-4eb6-a1d5-0a248fe0a87a",
 				"method": "GET"
 			},
 			{
-				"id": "df41da97-7298-4f22-9641-4b586d637bc7",
+				"id": "80cfa264-7d23-47d6-b1cd-1e26a8222c51",
 				"method": "POST"
 			},
 			{
-				"id": "3d170119-93cf-4ff0-867e-a434e633d1a8",
+				"id": "ad7a511a-46de-4dff-8d43-3ebbe3fa8256",
 				"method": "PATCH"
 			},
 			{
-				"id": "c7d730f8-19fa-4d32-922b-b1715ebf0d21",
+				"id": "0aaff327-aca0-44fd-9dd0-928db912f13a",
 				"method": "DELETE"
 			},
 			{
-				"id": "b1fcbd4a-7c0b-4b44-a5ff-228035fcee7b",
+				"id": "6aff70ac-04fe-470f-84fc-68072689b4b5",
 				"method": "GET"
 			},
 			{
-				"id": "99cc6977-9de8-4530-a8be-bc011281494c",
+				"id": "229d0964-f596-4883-9606-f66822585d22",
 				"method": "GET"
 			},
 			{
-				"id": "d5a80f72-86a6-4b7f-baec-8362e0bf904b",
+				"id": "05f41108-75b1-4b87-850a-bb347ecc188d",
 				"method": "POST"
 			},
 			{
-				"id": "e38dcf04-47f4-4d3e-95ad-6f9d49aeb1b5",
+				"id": "40a91fc0-fd84-4ae3-97b4-39f813a36ff6",
 				"method": "PATCH"
 			},
 			{
-				"id": "4fd60fbb-57dd-4be9-a8f4-38dcea582d32",
+				"id": "6870d3d0-d7d1-44d7-9db0-9163804bba39",
 				"method": "DELETE"
 			},
 			{
-				"id": "5db79d1c-5155-4968-aeb7-7833804d1178",
+				"id": "9569dc75-3d82-4ce3-8d46-7c603c70f222",
 				"method": "GET"
 			},
 			{
-				"id": "7968a1eb-9fe5-40df-8036-707169089620",
+				"id": "ffd97e44-eaf6-4687-8727-319802f3afff",
 				"method": "GET"
 			},
 			{
-				"id": "e8fa4668-8a80-4e12-829a-336a5a5ac762",
+				"id": "3676773f-611f-470c-993a-9dc6fc520d10",
 				"method": "POST"
 			},
 			{
-				"id": "cdb41fa9-3c75-4337-a451-9cb9e6c58bf5",
+				"id": "2b51ec5a-0782-4d36-9e71-dae20a37669b",
 				"method": "PATCH"
 			},
 			{
-				"id": "b775b200-e246-411b-9c20-0fd46f9519c9",
+				"id": "fe30687b-c6e1-4ea0-af48-8ef7040b5284",
 				"method": "DELETE"
 			}
 		]

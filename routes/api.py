@@ -15,17 +15,36 @@ from forms import *
 
 api_app = Blueprint('api_app', __name__)
 
+
+def paginate(request, selection, ITEM_PER_PAGE):
+    # Get the current page, if not provided use 1 as default
+    page = request.args.get('page', 1, type=int)
+    # Define the first item 
+    start = (page - 1) * ITEM_PER_PAGE
+    # Define last item
+    end = start + ITEM_PER_PAGE
+    bound = [start, end]
+    # Return boundaries
+    return bound
+
+
 @api_app.route('/api/games')
 def get_games():
     # Query all games from the db
-    games = Game.query.order_by(Game.id).all()
-    # Format all games
-    formatted_games = [game.format() for game in games]
+    selection = Game.query.order_by(Game.id).all()
+    # Get boundaries
+    bound = paginate(request, selection, 8)
+    # Format games to be retrieved as JSON
+    games = [game.format() for game in selection]
+    current_games = games[bound[0]:bound[1]]
+
+    if len(current_games) == 0:
+        abort(404)
 
     return jsonify({
         'success': True,
-        'total_games': len(formatted_games),
-        'games': formatted_games
+        'total_games': len(selection),
+        'games': current_games
     })
   
 # Search method
@@ -143,13 +162,20 @@ def edit_game(payload, game_id):
 @api_app.route('/api/categories')
 def get_categories():
     # Query all categories
-    categories = Category.query.order_by(Category.id).all()
-    # Format categories
-    formatted_categories = [category.format() for category in categories]
+    selection = Category.query.order_by(Category.id).all()
+    # Get boundaries
+    bound = paginate(request, selection, 15)
+    # Format categories to be retrieved as JSON
+    categories = [category.format() for category in selection]
+    current_categories = categories[bound[0]:bound[1]]
+
+    if len(current_categories) == 0:
+        abort(404)
+
     return jsonify({
         "success": True,
-        "categories": formatted_categories,
-        "total_categories": len(formatted_categories)
+        "categories": current_categories,
+        "total_categories": len(selection)
     })
 
 @api_app.route('/api/categories', methods=['POST'])
@@ -242,13 +268,20 @@ def edit_category(payload, category_id):
 @api_app.route('/api/developers')
 def get_developers():
     # Query all developers
-    developers = Developer.query.order_by(Developer.id).all()
-    # Format developers
-    formatted_developers = [developer.format() for developer in developers]
+    selection = Developer.query.order_by(Developer.id).all()
+    # Get boundaries for pagination
+    bound = paginate(request, selection, 15)
+    # Format developers to be retrieved as JSON
+    developers = [developer.format() for developer in selection]
+    current_developers = developers[bound[0]:bound[1]]
+
+    if len(current_developers) == 0:
+        abort(404)
+
     return jsonify({
         "success": True,
-        "developers": formatted_developers,
-        "total_developers": len(formatted_developers)
+        "developers": current_developers,
+        "total_developers": len(selection)
     })
 
 @api_app.route('/api/developers', methods=['POST'])
@@ -276,7 +309,6 @@ def create_developer(payload):
 @api_app.route('/api/developers/<developer_id>')
 @requires_auth('get:developer-details')
 def show_developer(payload, developer_id):
-    print(developer_id)
     # Query the developer
     developer = Developer.query.get(developer_id)
     # If developer does not exist
