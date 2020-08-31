@@ -19,6 +19,8 @@ def setup_db(app, database_path=database_path, database_name=database_name):
     db.init_app(app)
     # Drop all records
     # db.drop_all()
+    # create all tables
+    db.create_all()
 
     # Seed the db with data (from a backup file)
     # os.system("psql -U mashaelmohammed  -d {0} -f  {1}".format(database_name, 'gamify.psql') )
