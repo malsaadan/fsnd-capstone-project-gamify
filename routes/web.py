@@ -38,12 +38,7 @@ def set_game_choices():
 # Landing page route
 @web_app.route('/')
 def index():
-    AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
-    AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
-    AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
-    AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL')
-    auth_link='https://'+AUTH0_DOMAIN+'/authorize?audience='+AUTH0_AUDIENCE+'&response_type=token&client_id='+AUTH0_CLIENT_ID+'&redirect_uri='+AUTH0_CALLBACK_URL
-    return render_template('pages/home.html', auth_link=auth_link)
+    return render_template('pages/home.html')
 
 @web_app.route('/callback')
 def callback():
