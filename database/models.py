@@ -6,9 +6,9 @@ import json
 database_name = "gamify"
 
 # local host path
-database_path = "postgres://{}@{}/{}".format('mashaelmohammed', 'localhost:5432', database_name)
+# database_path = "postgres://{}@{}/{}".format('mashaelmohammed', 'localhost:5432', database_name)
 # heroku path
-# database_path = "postgres://vwlmcqzupzkxkj:bf43c8dc10d4b854edb653c98b58df225ebb65e9cdc76902bbe49ee0db9b4101@ec2-3-215-207-12.compute-1.amazonaws.com:5432/dek8claq8cift1"
+database_path = "postgres://vwlmcqzupzkxkj:bf43c8dc10d4b854edb653c98b58df225ebb65e9cdc76902bbe49ee0db9b4101@ec2-3-215-207-12.compute-1.amazonaws.com:5432/dek8claq8cift1"
 db = SQLAlchemy()
 
 # binds a flask application and a SQLAlchemy service
