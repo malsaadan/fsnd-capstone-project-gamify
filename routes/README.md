@@ -8,12 +8,39 @@
 
 *Auth0 register/login Link: https://gamify-fsnd.us.auth0.com/authorize?audience=gamify&response_type=token&client_id=5xDwhLNUXk0SmdxZGSWcq81iVaANk3mn&redirect_uri=https://fsnd-gamify.herokuapp.com/callback*
 
-To test the api you can use the following tokens:
 
-Employee Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVZcFRLalNna1YwLUg1bUF1TnY3NyJ9.eyJpc3MiOiJodHRwczovL2dhbWlmeS1mc25kLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjQ2ZTgxYWM2NDc4YjAwNjdkODM3MDEiLCJhdWQiOiJnYW1pZnkiLCJpYXQiOjE1OTg5NDA2NzIsImV4cCI6MTU5ODk0Nzg3MiwiYXpwIjoiNXhEd2hMTlVYazBTbWR4WkdTV2NxODFpVmFBTmszbW4iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDpjYXRlZ29yeS1kZXRhaWxzIiwiZ2V0OmRldmVsb3Blci1kZXRhaWxzIiwiZ2V0OmdhbWUtZGV0YWlscyJdfQ.MIX-SeJUFI4t5SGMtAlRuWHuFDdD-YGAQ5lOFEVIjtPArcijaVzzG5zvfqPxDNOe8GWnXE2Itp46qI3Sh-RU1mc3qZVD2_dI8Qb8yKbzniHi9XWGh_TbHtH180fFlw8mdvCSBw33LLnTGtOqHcIwkTi_p5S6-cHe7hQ_AlwUTMsb_HUR_TwhrQoPJhmo521N_jo1cRKUyxCCH1B_ZG0ILtzneHoCC4F52-qTsSUtNbmZmnsillj8gWhPTBSpxqgn0YTZQ78c9UAXqSsd8WkHW8GGALGcmfkEDezEn6qpHcwWuN9g151_01lPzOdGxajHtE1TVDojvECYjNoYUmBgig
+## Roles and Permissions:
 
-Owner Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVZcFRLalNna1YwLUg1bUF1TnY3NyJ9.eyJpc3MiOiJodHRwczovL2dhbWlmeS1mc25kLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjQ4NTYyM2M2NDc4YjAwNjdkODRlMjIiLCJhdWQiOiJnYW1pZnkiLCJpYXQiOjE1OTg5NDA3NDIsImV4cCI6MTU5ODk0Nzk0MiwiYXpwIjoiNXhEd2hMTlVYazBTbWR4WkdTV2NxODFpVmFBTmszbW4iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpjYXRlZ29yaWVzIiwiZGVsZXRlOmRldmVsb3BlcnMiLCJkZWxldGU6Z2FtZXMiLCJlZGl0OmNhdGVnb3JpZXMiLCJlZGl0OmRldmVsb3BlcnMiLCJlZGl0OmdhbWVzIiwiZ2V0OmNhdGVnb3JpZXMiLCJnZXQ6Y2F0ZWdvcnktZGV0YWlscyIsImdldDpkZXZlbG9wZXItZGV0YWlscyIsImdldDpkZXZlbG9wZXJzIiwiZ2V0OmdhbWUtZGV0YWlscyIsImdldDpnYW1lcyIsInBvc3Q6Y2F0ZWdvcmllcyIsInBvc3Q6ZGV2ZWxvcGVycyIsInBvc3Q6Z2FtZXMiXX0.ldcutEOQ5wIb7o_mLXf4Cbfs7lFOgWA2yL5jmzzgTjgbVOURpUokYVapjKZCqFMWEX8EeqHteEWuY3lCE2GvSISwbGxpTsVUCtEfbfQ1rMj_5STvmtL_W0KCvPQdmCuCd1y8ghcXj9Q6pHaA7lXehPdVTruQuu0tumNKnc1yDmYPhIYahvj7vd4Ol27SKQpsMMUWGhygq3zKWpVMcdYuCfHo5K6pPnFATzIOG3g2XoOBoVjIkpNbQIdYP6GAbKy3siqDVaJrJ4MyZ4hlMFuklQlsoF8tkGuheHyqW-c6ILn6ktXqFjEeM4MQr9og9UknTS9ruUhuvSOZjvzZB9fTIQ
+* Public:
 
+  * Can view all games, categories and developers
+
+* Employee:
+
+  * Can view the details of games, categories and developers
+
+    * 'get:game-details'
+    * 'get:category-details'
+    * 'get:developer-details'
+
+* Owner:
+
+  * All permissions an Employee has and ... 
+  * Add games, categories, or developers
+  * Delete games, categories, or developers
+  * Modify games, categories, or developers
+
+    * 'post:games'
+    * 'post:categories'
+    * 'post:developers'
+    * 'delete:games'
+    * 'delete:categories'
+    * 'delete:developers'
+    * 'edit:games'
+    * 'edit:categories'
+    * 'edit:developers'
+
+> Note: You can find a token for each role in setup.sh file, you can copy and decode at jwt to see permissions for each token.
 
 ## Error Handling
 

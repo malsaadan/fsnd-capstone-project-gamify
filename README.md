@@ -10,6 +10,7 @@ This project was built as a requirement in Misk Academy-Udacity Full-Stack Devel
 * [Structure](#structure)
 * [ERD](#erd)
 * [Installation](#installation)
+* [Deployment](#deployment)
 * [Future Work](#future-work)
 
 ## Overview
@@ -126,6 +127,10 @@ createdb gamify_test
 psql gamify_test < gamify.psql
 python test_app.py
 ```
+
+## Deployment
+
+The API is deployed on Heroku [gamify link](https://fsnd-gamify.herokuapp.com/)
 
 ## Future Work
 
