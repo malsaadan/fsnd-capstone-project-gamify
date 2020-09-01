@@ -1,7 +1,7 @@
 from flask import (
     Blueprint,
-    request, 
-    abort, 
+    request,
+    abort,
     jsonify,
     render_template,
     redirect,
@@ -19,7 +19,7 @@ api_app = Blueprint('api_app', __name__)
 def paginate(request, selection, ITEM_PER_PAGE):
     # Get the current page, if not provided use 1 as default
     page = request.args.get('page', 1, type=int)
-    # Define the first item 
+    # Define the first item
     start = (page - 1) * ITEM_PER_PAGE
     # Define last item
     end = start + ITEM_PER_PAGE
@@ -46,8 +46,10 @@ def get_games():
         'total_games': len(selection),
         'games': current_games
     })
-  
+
 # Search method
+
+
 @api_app.route('/api/search')
 def search_game():
     # Get the search term from parameter
@@ -57,8 +59,10 @@ def search_game():
         abort(400)
 
     else:
-        # Query games from the database and filter them by name which matches the search term
-        search_results = Game.query.filter(Game.name.ilike(f'%{search_term}%')).all()
+        # Query games from the database and filter them by name which matches
+        # the search term
+        search_results = Game.query.filter(
+            Game.name.ilike(f'%{search_term}%')).all()
         # Format the results
         formatted_results = [result.format() for result in search_results]
         return jsonify({
@@ -67,21 +71,26 @@ def search_game():
             'num_results': len(formatted_results)
         })
 
+
 @api_app.route('/api/games', methods=['POST'])
 @requires_auth('post:games')
 def create_game(payload):
     body = request.get_json()
     # If the request doesn't contain the below keys return 400
-    if not ('name' in body and 'age_rating' in body and 'category_id' in body and 'developer_id' in body and 'image_link' in body):
+    if not ('name' in body and
+            'age_rating' in body and
+            'category_id' in body and
+            'developer_id' in body and
+            'image_link' in body):
         abort(400)
     try:
         # Create a game instance
         game = Game(
-            name = body.get('name'),
-            age_rating = body.get('age_rating'),
-            category_id = body.get('category_id'),
-            developer_id = body.get('developer_id'),
-            image_link = body.get('image_link')
+            name=body.get('name'),
+            age_rating=body.get('age_rating'),
+            category_id=body.get('category_id'),
+            developer_id=body.get('developer_id'),
+            image_link=body.get('image_link')
         )
         # Create the record
         game.insert()
@@ -90,8 +99,9 @@ def create_game(payload):
             "success": True,
             "game": game.format()
         })
-    except:
+    except BaseException:
         abort(422)
+
 
 @api_app.route('/api/games/<game_id>')
 @requires_auth('get:game-details')
@@ -106,6 +116,7 @@ def show_game(payload, game_id):
         "success": True,
         "game": game.format()
     })
+
 
 @api_app.route('/api/games/<game_id>', methods=['DELETE'])
 @requires_auth('delete:games')
@@ -123,9 +134,10 @@ def delete_game(payload, game_id):
             "deleted": game.id,
             "games": [game.format() for game in games]
         })
-    except:
+    except BaseException:
         abort(422)
-      
+
+
 @api_app.route('/api/games/<game_id>', methods=['PATCH'])
 @requires_auth('edit:games')
 def edit_game(payload, game_id):
@@ -137,7 +149,11 @@ def edit_game(payload, game_id):
     # Get body from the request
     body = request.get_json()
     # If the request doesn't contain the below keys return 400
-    if not ('name' in body and 'age_rating' in body and 'category_id' in body and 'developer_id' in body and 'image_link' in body):
+    if not ('name' in body and
+            'age_rating' in body and
+            'category_id' in body and
+            'developer_id' in body and
+            'image_link' in body):
         abort(400)
 
     try:
@@ -155,9 +171,10 @@ def edit_game(payload, game_id):
             'success': True,
             'updated': game_id,
             'games': [game.format() for game in games]
-            })
-    except:
+        })
+    except BaseException:
         abort(422)
+
 
 @api_app.route('/api/categories')
 def get_categories():
@@ -178,6 +195,7 @@ def get_categories():
         "total_categories": len(selection)
     })
 
+
 @api_app.route('/api/categories', methods=['POST'])
 @requires_auth('post:categories')
 def create_category(payload):
@@ -188,8 +206,8 @@ def create_category(payload):
     try:
         # Create Category instance
         category = Category(
-            name = body.get('name'),
-            description = body.get('description')
+            name=body.get('name'),
+            description=body.get('description')
         )
         # Insert the instance into the db
         category.insert()
@@ -197,8 +215,9 @@ def create_category(payload):
             "success": True,
             "category": category.format()
         })
-    except:
+    except BaseException:
         abort(422)
+
 
 @api_app.route('/api/categories/<category_id>')
 @requires_auth('get:category-details')
@@ -217,7 +236,8 @@ def show_category(payload, category_id):
         "total_games": len(formatted_games),
         "games": formatted_games
     })
-    
+
+
 @api_app.route('/api/categories/<category_id>', methods=['DELETE'])
 @requires_auth('delete:games')
 def delete_category(payload, category_id):
@@ -227,7 +247,7 @@ def delete_category(payload, category_id):
     if category is None:
         abort(404)
     try:
-        # If the category was found delete it 
+        # If the category was found delete it
         category.delete()
         categories = Category.query.all()
         return jsonify({
@@ -235,9 +255,10 @@ def delete_category(payload, category_id):
             "deleted": category.id,
             "categories": [category.format() for category in categories]
         })
-    except:
+    except BaseException:
         abort(422)
- 
+
+
 @api_app.route('/api/categories/<category_id>', methods=['PATCH'])
 @requires_auth('edit:games')
 def edit_category(payload, category_id):
@@ -251,7 +272,7 @@ def edit_category(payload, category_id):
     if not ('name' in body and 'description' in body):
         abort(400)
     try:
-        # Get each variable to be updated from the body 
+        # Get each variable to be updated from the body
         category.name = body.get('name')
         category.description = body.get('description')
         # Update the instance
@@ -262,8 +283,9 @@ def edit_category(payload, category_id):
             "updated": category_id,
             "categories": [category.format() for category in categories]
         })
-    except:
+    except BaseException:
         abort(422)
+
 
 @api_app.route('/api/developers')
 def get_developers():
@@ -284,6 +306,7 @@ def get_developers():
         "total_developers": len(selection)
     })
 
+
 @api_app.route('/api/developers', methods=['POST'])
 @requires_auth('post:games')
 def create_developer(payload):
@@ -294,8 +317,8 @@ def create_developer(payload):
     try:
         # Create a Developer instance
         developer = Developer(
-            name = body.get('name'),
-            website = body.get('website')
+            name=body.get('name'),
+            website=body.get('website')
         )
         # Insert the instance into the db
         developer.insert()
@@ -303,8 +326,9 @@ def create_developer(payload):
             "success": True,
             "developer": developer.format()
         })
-    except:
+    except BaseException:
         abort(422)
+
 
 @api_app.route('/api/developers/<developer_id>')
 @requires_auth('get:developer-details')
@@ -325,6 +349,7 @@ def show_developer(payload, developer_id):
         "games": formatted_games
     })
 
+
 @api_app.route('/api/developers/<developer_id>', methods=['DELETE'])
 @requires_auth('delete:developers')
 def delete_developer(payload, developer_id):
@@ -342,15 +367,16 @@ def delete_developer(payload, developer_id):
             "deleted": developer_id,
             "developers": [developer.format() for developer in developers]
         })
-    except:
+    except BaseException:
         abort(422)
-    
+
+
 @api_app.route('/api/developers/<developer_id>', methods=['PATCH'])
 @requires_auth('edit:developers')
 def edit_developer(payload, developer_id):
     # Query the developer
     developer = Developer.query.filter_by(id=developer_id).one_or_none()
-    # If the developer does not exist 
+    # If the developer does not exist
     if developer is None:
         abort(404)
     body = request.get_json()
@@ -369,10 +395,12 @@ def edit_developer(payload, developer_id):
             "updated": developer_id,
             "developers": [developer.format() for developer in developers]
         })
-    except:
+    except BaseException:
         abort(422)
 
 # Error Handlers
+
+
 @api_app.errorhandler(404)
 def not_found(error):
     return jsonify({
@@ -380,7 +408,8 @@ def not_found(error):
         'error': 404,
         'message': 'Resource Not Found'
     }), 404
-    
+
+
 @api_app.errorhandler(500)
 def internal_server(error):
     return jsonify({
@@ -388,6 +417,7 @@ def internal_server(error):
         'error': 500,
         'message': 'Internal Server Error'
     }), 500
+
 
 @api_app.errorhandler(422)
 def unprocessable(error):
@@ -397,6 +427,7 @@ def unprocessable(error):
         'message': 'Unprocessable Entity'
     }), 422
 
+
 @api_app.errorhandler(400)
 def bad_request(error):
     return jsonify({
@@ -405,6 +436,7 @@ def bad_request(error):
         'message': 'Bad Request'
     }), 400
 
+
 @api_app.errorhandler(405)
 def method_not_allowed(error):
     return jsonify({
@@ -412,6 +444,7 @@ def method_not_allowed(error):
         'error': 405,
         'message': 'Method Not Allowed'
     }), 405
+
 
 @api_app.errorhandler(AuthError)
 def auth_error(error):

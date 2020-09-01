@@ -6,18 +6,20 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN='gamify-fsnd.us.auth0.com'
+AUTH0_DOMAIN = 'gamify-fsnd.us.auth0.com'
 API_AUDIENCE = 'gamify'
 ALGORITHMS = ['RS256']
 
-## AuthError Exception
+# AuthError Exception
+
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
 
 
-## Auth Header
+# Auth Header
 def get_token_auth_header():
     # Obtain Access Token from the Authorization Header
     auth = request.headers.get('Authorization', None)
@@ -27,7 +29,7 @@ def get_token_auth_header():
         raise AuthError({
             'code': 'authorization_header_missing',
             'description': 'Authorization header is expected.'
-            }, 401)
+        }, 401)
 
     # Split the header into two parts => Bearer, Token
     parts = auth.split()
@@ -37,21 +39,21 @@ def get_token_auth_header():
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must start with "Bearer".'
-            }, 401)
+        }, 401)
 
     # Check if Token exists
     elif len(parts) == 1:
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Token not found.'
-            }, 401)
+        }, 401)
 
     # Make sure the Authorization header is a bearer token
     elif len(parts) > 2:
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must be bearer token.'
-            }, 401)
+        }, 401)
 
     # Get the second part (token)
     token = parts[1]
@@ -65,14 +67,15 @@ def check_permissions(permission, payload):
         raise AuthError({
             'code': 'invalid_claims',
             'description': 'Permissions not included in JWT.'
-            }, 400)
+        }, 400)
 
-    # Check that the passed permission string is included in the payload (authorized)
+    # Check that the passed permission string is included in the payload
+    # (authorized)
     if permission not in payload['permissions']:
         raise AuthError({
             'code': 'unauthorized',
             'description': 'Permission is not found.'
-            }, 401)
+        }, 401)
 
     return True
 
@@ -117,7 +120,7 @@ def verify_decode_jwt(token):
             )
 
             return payload
-            
+
         except jwt.ExpiredSignatureError:
             raise AuthError({
                 'code': 'token_expired',
@@ -127,9 +130,10 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. '
+                'Check the audience and issuer.'
             }, 401)
-        
+
         except Exception:
             raise AuthError({
                 'code': 'invalid_header',
@@ -137,8 +141,8 @@ def verify_decode_jwt(token):
             }, 400)
 
     raise AuthError({
-            'code': 'invalid_header',
-            'description': 'Unable to find the appropriate key.'
+        'code': 'invalid_header',
+        'description': 'Unable to find the appropriate key.'
     }, 400)
 
 
@@ -152,7 +156,7 @@ def requires_auth(permission=''):
             try:
                 # Decode jwt
                 payload = verify_decode_jwt(token)
-            except:
+            except BaseException:
                 raise AuthError({
                     "code": "invalid_payload",
                     "description": "Unable to decode payload."

@@ -6,12 +6,14 @@ import json
 database_name = "gamify"
 
 # local host path
-database_path = "postgres://{}@{}/{}".format('mashaelmohammed', 'localhost:5432', database_name)
-# heroku path
-# database_path = "postgres://vwlmcqzupzkxkj:bf43c8dc10d4b854edb653c98b58df225ebb65e9cdc76902bbe49ee0db9b4101@ec2-3-215-207-12.compute-1.amazonaws.com:5432/dek8claq8cift1"
+database_path = "postgres://{}@{}/{}".format(
+    'mashaelmohammed', 'localhost:5432', database_name)
+
 db = SQLAlchemy()
 
 # binds a flask application and a SQLAlchemy service
+
+
 def setup_db(app, database_path=database_path, database_name=database_name):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -19,11 +21,11 @@ def setup_db(app, database_path=database_path, database_name=database_name):
     db.init_app(app)
     db.create_all()
 
-#----------------------------------------------------------------------------#
-# Models
-#----------------------------------------------------------------------------#
+# ----------------------Models---------------------------------------------
 
 # a persistent Game entity, extends the base SQLAlchemy Model
+
+
 class Game(db.Model):
     __tablename__ = 'games'
 
@@ -34,7 +36,8 @@ class Game(db.Model):
     developer_id = Column(Integer, ForeignKey('developers.id'), nullable=False)
     image_link = Column(String)
 
-    def __init__(self, name, age_rating, category_id, developer_id, image_link):
+    def __init__(self, name, age_rating, category_id,
+                 developer_id, image_link):
         self.name = name
         self.age_rating = age_rating
         self.category_id = category_id
@@ -76,12 +79,16 @@ class Category(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
-    games = db.relationship('Game', cascade="all,delete", backref='category', lazy='dynamic')
+    games = db.relationship(
+        'Game',
+        cascade="all,delete",
+        backref='category',
+        lazy='dynamic')
 
     def __init__(self, name, description):
         self.name = name
         self.description = description
-    
+
     # inserts a new model into a database
     def insert(self):
         db.session.add(self)
@@ -114,7 +121,11 @@ class Developer(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     website = Column(String)
-    games = db.relationship('Game', cascade="all,delete", backref='developer', lazy='dynamic')
+    games = db.relationship(
+        'Game',
+        cascade="all,delete",
+        backref='developer',
+        lazy='dynamic')
 
     def __init__(self, name, website):
         self.name = name
