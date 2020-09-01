@@ -6,8 +6,8 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
-API_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
+AUTH0_DOMAIN='gamify-fsnd.us.auth0.com'
+API_AUDIENCE = 'gamify'
 ALGORITHMS = ['RS256']
 
 ## AuthError Exception

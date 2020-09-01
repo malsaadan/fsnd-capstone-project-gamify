@@ -1,19 +1,22 @@
 import unittest
+import os
 import json
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
 from database.models import setup_db, Game, Category, Developer
 
+TOKEN = "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVZcFRLalNna1YwLUg1bUF1TnY3NyJ9.eyJpc3MiOiJodHRwczovL2dhbWlmeS1mc25kLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjQ4NTYyM2M2NDc4YjAwNjdkODRlMjIiLCJhdWQiOiJnYW1pZnkiLCJpYXQiOjE1OTg5NDA3NDIsImV4cCI6MTU5ODk0Nzk0MiwiYXpwIjoiNXhEd2hMTlVYazBTbWR4WkdTV2NxODFpVmFBTmszbW4iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpjYXRlZ29yaWVzIiwiZGVsZXRlOmRldmVsb3BlcnMiLCJkZWxldGU6Z2FtZXMiLCJlZGl0OmNhdGVnb3JpZXMiLCJlZGl0OmRldmVsb3BlcnMiLCJlZGl0OmdhbWVzIiwiZ2V0OmNhdGVnb3JpZXMiLCJnZXQ6Y2F0ZWdvcnktZGV0YWlscyIsImdldDpkZXZlbG9wZXItZGV0YWlscyIsImdldDpkZXZlbG9wZXJzIiwiZ2V0OmdhbWUtZGV0YWlscyIsImdldDpnYW1lcyIsInBvc3Q6Y2F0ZWdvcmllcyIsInBvc3Q6ZGV2ZWxvcGVycyIsInBvc3Q6Z2FtZXMiXX0.ldcutEOQ5wIb7o_mLXf4Cbfs7lFOgWA2yL5jmzzgTjgbVOURpUokYVapjKZCqFMWEX8EeqHteEWuY3lCE2GvSISwbGxpTsVUCtEfbfQ1rMj_5STvmtL_W0KCvPQdmCuCd1y8ghcXj9Q6pHaA7lXehPdVTruQuu0tumNKnc1yDmYPhIYahvj7vd4Ol27SKQpsMMUWGhygq3zKWpVMcdYuCfHo5K6pPnFATzIOG3g2XoOBoVjIkpNbQIdYP6GAbKy3siqDVaJrJ4MyZ4hlMFuklQlsoF8tkGuheHyqW-c6ILn6ktXqFjEeM4MQr9og9UknTS9ruUhuvSOZjvzZB9fTIQ"
+
 class GamifyTestCase(unittest.TestCase):
     '''
     This class represents the gamify test case
     '''
-
     def setUp(self):
         # Define test variables and initialize app
         self.app = create_app()
         self.client = self.app.test_client
+        self.headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         self.database_name = "gamify_test"
         self.database_path = "postgres://{}@{}/{}".format('mashaelmohammed', 'localhost:5432', self.database_name)
         setup_db(self.app, self.database_path, self.database_name)
@@ -22,6 +25,7 @@ class GamifyTestCase(unittest.TestCase):
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
+            self.db.create_all()
     
     def tearDown(self):
         ''' Executed after each test '''
@@ -48,13 +52,11 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of searching for a game
     def test_search_game(self):
-        res = self.client().get('/api/search?q=league')
+        res = self.client().get('/api/search?q=v')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertTrue(data['search_results'])
-        self.assertTrue(data['num_results'])
 
     # Failure behavior of searching with an empty input
     def test_search_with_empty_term(self):
@@ -75,7 +77,7 @@ class GamifyTestCase(unittest.TestCase):
             'image_link': 'https://upload.wikimedia.org/wikipedia/en/5/51/Overwatch_cover_art.jpg'
         }
 
-        res = self.client().post('/api/games', json = new_game)
+        res = self.client().post('/api/games', json = new_game, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -89,7 +91,7 @@ class GamifyTestCase(unittest.TestCase):
             'age_rating': '+18'
         }
 
-        res = self.client().post('/api/games', json = new_game)
+        res = self.client().post('/api/games', json = new_game, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -98,7 +100,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of retrieving game details
     def test_show_game(self):
-        res = self.client().get('/api/games/1')
+        res = self.client().get('/api/games/2', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -107,7 +109,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of retrieving a game's details that doesn't exist
     def test_show_404_game_not_found(self):
-        res = self.client().get('/api/games/100')
+        res = self.client().get('/api/games/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -116,7 +118,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of deleting a game
     def test_delete_game(self):
-        res = self.client().delete('/api/games/1')
+        res = self.client().delete('/api/games/3', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -125,7 +127,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of deleting a game 
     def test_delete_404_game_not_found(self):
-        res = self.client().delete('/api/games/100')
+        res = self.client().delete('/api/games/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -137,11 +139,11 @@ class GamifyTestCase(unittest.TestCase):
         updated_game = {
             'name': 'ow',
             'age_rating': '+18',
-            'category_id': 1,
-            'developer_id': 1,
+            'category_id': 2,
+            'developer_id': 2,
             'image_link': 'https://www.gametutorials.com/wp-content/uploads/2020/08/overwatch-characters.jpg'
         }
-        res = self.client().patch('/api/games/1', json = updated_game)
+        res = self.client().patch('/api/games/2', json = updated_game, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -155,7 +157,7 @@ class GamifyTestCase(unittest.TestCase):
             'age_rating': '+18'
         }
 
-        res = self.client().patch('/api/games/1', json = updated_game)
+        res = self.client().patch('/api/games/2', json = updated_game, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -172,7 +174,7 @@ class GamifyTestCase(unittest.TestCase):
             'image_link': 'https://www.gametutorials.com/wp-content/uploads/2020/08/overwatch-characters.jpg'
         }
 
-        res = self.client().patch('/api/games/100', json = updated_game)
+        res = self.client().patch('/api/games/100', json = updated_game, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -205,7 +207,7 @@ class GamifyTestCase(unittest.TestCase):
             'description':'they\'re all designed to emulate real or fictional reality, to simulate a real situation or event.'
         }
 
-        res = self.client().post('/api/categories', json=new_category)
+        res = self.client().post('/api/categories', json=new_category, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -218,7 +220,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'Action'
         }
 
-        res = self.client().post('/api/categories', json = new_category)
+        res = self.client().post('/api/categories', json = new_category, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -227,7 +229,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of retrieving a category's details
     def test_show_category(self):
-        res = self.client().get('/api/categories/1')
+        res = self.client().get('/api/categories/2', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -236,7 +238,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of retrieving category details (retrieving the details of a category that doesn't exist)
     def test_show_404_category_not_found(self):
-        res = self.client().get('/api/categories/100')
+        res = self.client().get('/api/categories/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -245,7 +247,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of deleting a category 
     def test_delete_category(self):
-        res = self.client().delete('/api/categories/1')
+        res = self.client().delete('/api/categories/1', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -254,7 +256,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of deleting a category (category doesn't exist)
     def test_delete_404_category_not_found(self):
-        res = self.client().delete('/api/categories/100')
+        res = self.client().delete('/api/categories/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -267,7 +269,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'Puzzle Games',
             'description': 'Puzzle or logic games usually take place on a single screen or playfield and require the player to solve a problem to advance the action.'
         }
-        res = self.client().patch('/api/categories/1', json = updated_category)
+        res = self.client().patch('/api/categories/2', json = updated_category, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -280,7 +282,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'Strategy'
         }
 
-        res = self.client().patch('/api/categories/1', json = updated_category)
+        res = self.client().patch('/api/categories/2', json = updated_category, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -294,7 +296,7 @@ class GamifyTestCase(unittest.TestCase):
             'description': 'With gameplay is based on traditional strategy board games, strategy games give players a godlike access to the world and its resources. These games require players to use carefully developed strategy and tactics to overcome challenges. More recently, these type of games have moved from turn-based systems to real-time gameplay in response to player feedback.'
         }
 
-        res = self.client().patch('/api/categories/100', json = updated_category)
+        res = self.client().patch('/api/categories/100', json = updated_category, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -326,7 +328,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'riot',
             'website': 'www.riotgames.com'
         }
-        res = self.client().post('/api/developers', json = new_developer)
+        res = self.client().post('/api/developers', json = new_developer, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -339,7 +341,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'bungie'
         }
 
-        res = self.client().post('/api/developers', json = new_developer)
+        res = self.client().post('/api/developers', json = new_developer, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -348,7 +350,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of retrieving a developer details
     def test_show_developer(self):
-        res = self.client().get('/api/developers/1')
+        res = self.client().get('/api/developers/2', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -357,7 +359,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of retrieving details of developer (developer doesn't exist)
     def test_show_404_developer_not_found(self):
-        res = self.client().get('/api/developers/100')
+        res = self.client().get('/api/developers/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -366,7 +368,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Success behavior of deleting a developer
     def test_delete_developer(self):
-        res = self.client().delete('/api/developers/2')
+        res = self.client().delete('/api/developers/1', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -375,7 +377,7 @@ class GamifyTestCase(unittest.TestCase):
 
     # Failure behavior of deleting a developer (developer doesn't exist)
     def test_delete_404_developer_not_found(self):
-        res = self.client().delete('/api/developers/100')
+        res = self.client().delete('/api/developers/100', headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -388,7 +390,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'epic games',
             'website': 'www.epicgames.com'
         }
-        res = self.client().patch('/api/developers/2', json = updated_developer)
+        res = self.client().patch('/api/developers/2', json = updated_developer, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -400,7 +402,7 @@ class GamifyTestCase(unittest.TestCase):
         updated_developer = {
             'name': 'bungie'
         }
-        res = self.client().patch('/api/developers/2', json = updated_developer)
+        res = self.client().patch('/api/developers/2', json = updated_developer, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 400)
@@ -413,7 +415,7 @@ class GamifyTestCase(unittest.TestCase):
             'name': 'bungie',
             'website': 'www.bungie.net'
         }
-        res = self.client().patch('/api/developers/100', json = updated_developer)
+        res = self.client().patch('/api/developers/100', json = updated_developer, headers=self.headers)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)

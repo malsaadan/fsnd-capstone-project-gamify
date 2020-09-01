@@ -1,0 +1,6 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+  <h1>Method Not Allowed</h1>
+  <p>A request was made of a resource using a request method not supported by that resource..</p>
+  <p><a href="{{url_for('web_app.index')}}">Back</a></p>
+{% endblock %}

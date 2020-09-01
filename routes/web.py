@@ -93,9 +93,9 @@ def create_game_submission():
             developer_id = developer.id,
             image_link = request.form["image_link"]
         )
+
         # Create the record
         game.insert()
-
         flash(request.form['name']+ ' game was successfully listed!')
         return redirect(url_for('web_app.get_games'))
     except:
@@ -348,6 +348,10 @@ def unprocessable(error):
 @web_app.errorhandler(400)
 def bad_request(error):
     return render_template('errors/400.html'), 400
+
+@web_app.errorhandler(405)
+def method_not_allowed(error):
+    return render_template('errors/405.html'), 405
 
 @web_app.errorhandler(AuthError)
 def auth_error(error):

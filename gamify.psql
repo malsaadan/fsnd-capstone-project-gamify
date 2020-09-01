@@ -175,6 +175,8 @@ COPY public.developers (id, name, website) FROM stdin;
 
 COPY public.games (id, name, age_rating, category_id, developer_id, image_link) FROM stdin;
 1	league of legends	+18	1	1	https://sm.ign.com/t/ign_mear/screenshot/default/league-of-legends_6d7q.h960.jpg
+2	valorant	+18	2	2	https://images.goodgam.es/8RomeOKHaf8/enlarge:1/plain/covers/682-valorant-cover.jpg@png
+3	league of legends	+18	2	2	https://sm.ign.com/t/ign_mear/screenshot/default/league-of-legends_6d7q.h960.jpg
 \.
 
 
@@ -196,7 +198,7 @@ SELECT pg_catalog.setval('public.developers_id_seq', 2, true);
 -- Name: games_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mashaelmohammed
 --
 
-SELECT pg_catalog.setval('public.games_id_seq', 1, true);
+SELECT pg_catalog.setval('public.games_id_seq', 3, true);
 
 
 --

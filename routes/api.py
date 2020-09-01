@@ -405,6 +405,14 @@ def bad_request(error):
         'message': 'Bad Request'
     }), 400
 
+@api_app.errorhandler(405)
+def method_not_allowed(error):
+    return jsonify({
+        'success': False,
+        'error': 405,
+        'message': 'Method Not Allowed'
+    }), 405
+
 @api_app.errorhandler(AuthError)
 def auth_error(error):
     return jsonify({
