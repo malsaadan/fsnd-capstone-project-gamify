@@ -6,24 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app import create_app
 from database.models import setup_db, Game, Category, Developer
 
-TOKEN = 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImV'\
-    'ZcFRLalNna1YwLUg1bUF1TnY3NyJ9.eyJpc3MiOiJodHRwczovL2dhbWlme'\
-    'S1mc25kLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjRlODNjNmU5Z'\
-    'WY1ZjAwNjdiNWRlZmUiLCJhdWQiOiJnYW1pZnkiLCJpYXQiOjE1OTg5ODEzM'\
-    'TgsImV4cCI6MTU5OTA2NzcxNywiYXpwIjoiNXhEd2hMTlVYazBTbWR4WkdTV2'\
-    'NxODFpVmFBTmszbW4iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV'\
-    '0ZTpjYXRlZ29yaWVzIiwiZGVsZXRlOmRldmVsb3BlcnMiLCJkZWxldGU6Z2Ft'\
-    'ZXMiLCJlZGl0OmNhdGVnb3JpZXMiLCJlZGl0OmRldmVsb3BlcnMiLCJlZGl0O'\
-    'mdhbWVzIiwiZ2V0OmNhdGVnb3JpZXMiLCJnZXQ6Y2F0ZWdvcnktZGV0YWlscy'\
-    'IsImdldDpkZXZlbG9wZXItZGV0YWlscyIsImdldDpkZXZlbG9wZXJzIiwiZ2V'\
-    '0OmdhbWUtZGV0YWlscyIsImdldDpnYW1lcyIsInBvc3Q6Y2F0ZWdvcmllcyIs'\
-    'InBvc3Q6ZGV2ZWxvcGVycyIsInBvc3Q6Z2FtZXMiXX0.cHeh9aA4xBaCW_RhM'\
-    '03UDhe5OL_cLb0oYJD686OCeWFvoCMETxw4tJfsALiGGARNWHbNNvjhmYXR-'\
-    'meaL-QvfHuamWikG84cQmruUFgAPaEdvW5IOuylZlKFJMLyZJS20jgEwNIjnO'\
-    'Ue01w61SHaKVz8WjojJ4FqjUhnLZCD38NYSsBkIbsi2_EqQmDm_v0tsCfNwju'\
-    'rDB4L7uweXOl2cZ3ccKbzSfH_gAzcVZ4cTaNzUzq19hDFambqNalPTUNRiIDc'\
-    'Nm137ltcTdxfwXAcyEx87quwLB0gNJOMEz0zukzgJtr2XumH0gQ7vmdmmR1'\
-    'r0BdaAAAFr_uVshrPvuvkvw'
+TOKEN = str('Bearer ' + os.environ['OWNER_TOKEN'])
 
 
 class GamifyTestCase(unittest.TestCase):
